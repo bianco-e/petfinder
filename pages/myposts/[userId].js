@@ -1,13 +1,18 @@
 import { useRouter } from "next/router";
 import Pets from "../../components/Pets";
 import PageTitle from "../../components/PageTitle";
+import mockedData from "../../mockedData.json";
+
 export default function MyPosts({ posts = [] }) {
   const router = useRouter();
   const { userId } = router.query;
+  const myPosts = mockedData.filter(
+    ({ user }) => `google-oauth2|${user.userId}` === userId
+  );
   return (
     <>
       <PageTitle title="Mis publicaciones" />
-      <Pets pets={posts} />
+      <Pets editableCards pets={myPosts} />
     </>
   );
 }

@@ -9,6 +9,8 @@ import {
   faChevronRight,
   faChevronLeft,
   faImages,
+  faTrash,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const icons = {
@@ -22,6 +24,8 @@ export const icons = {
   rightArrow: faChevronRight,
   leftArrow: faChevronLeft,
   blankImage: faImages,
+  delete: faTrash,
+  edit: faEdit,
 };
 
 export const filtersData = [

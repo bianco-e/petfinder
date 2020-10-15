@@ -16,7 +16,7 @@ export default function Button({
   return (
     <button
       className={`${style.base} ${style[variant]} ${xl && "w-48"} ${
-        spaced && "my-1"
+        spaced && "m-1"
       }`}
       onClick={(e) => onClick(e)}
     >

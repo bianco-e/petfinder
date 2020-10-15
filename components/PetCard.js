@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { icons } from "../utils/utils";
 import { useRouter } from "next/router";
+import EditPostButtons from "./EditPostButtons";
 import Button from "./Button";
 
 const style = {
@@ -19,7 +20,7 @@ const style = {
   },
 };
 
-export default function PetCard({ data, variant = "normal" }) {
+export default function PetCard({ data, editable, variant = "normal" }) {
   const { images, user, pet, date, text, location, state } = data;
   const router = useRouter();
   const message = `¡Hola! Te contacto por la publicación de Petfinder ${router.route}`;
@@ -63,17 +64,21 @@ export default function PetCard({ data, variant = "normal" }) {
               <p className="text-orange-900 leading-none">{user.firstName}</p>
             </div>
           </div>
-          <Button
-            onClick={() =>
-              window.open(
-                `https://wa.me/${user.phone}?text=${message}`,
-                "_ blank"
-              )
-            }
-            variant="terciary"
-          >
-            Contactar
-          </Button>
+          {!editable ? (
+            <Button
+              onClick={() =>
+                window.open(
+                  `https://wa.me/${user.phone}?text=${message}`,
+                  "_ blank"
+                )
+              }
+              variant="terciary"
+            >
+              Contactar
+            </Button>
+          ) : (
+            <EditPostButtons deleteFn={() => {}} editFn={() => {}} />
+          )}
         </div>
       </div>
     </div>
