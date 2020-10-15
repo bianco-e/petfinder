@@ -2,9 +2,11 @@ import { useState } from "react";
 import auth0 from "../utils/auth0";
 import MainFilter from "../components/MainFilter";
 import Pets from "../components/Pets";
+import postsAPI from "../db/posts/api";
 import mockedData from "../mockedData.json";
 
-export default function Home({ user }) {
+export default function Home({ user, posts }) {
+  console.log(posts);
   const [appliedFilters, setAppliedFilters] = useState({
     city: { value: undefined, title: undefined },
     species: { value: undefined, title: undefined },
@@ -35,16 +37,20 @@ export default function Home({ user }) {
   return (
     <>
       <MainFilter setFilter={setFilter} appliedFilters={appliedFilters} />
-      <Pets pets={pets} />
+      <Pets pets={posts} />
     </>
   );
 }
 
 export async function getServerSideProps(context) {
+  // Implementar React Query en un futuro
   try {
+    const filters = {};
+    const filteredPosts = await postsAPI.getFilteredDataBy(filters);
     const session = await auth0.getSession(context.req);
     return {
       props: {
+        posts: filteredPosts,
         user: session?.user || null,
       },
     };
@@ -52,7 +58,7 @@ export async function getServerSideProps(context) {
     console.log(error);
     return {
       props: {
-        error: "something went wrong",
+        posts: [],
       },
     };
   }
