@@ -1,0 +1,151 @@
+[
+  {
+    "id": 0,
+    "user": {
+      "image": "/person-avatar-1.jpg",
+      "firstName": "Jorge",
+      "lastName": "Pusineri",
+      "phone": "5493415080085"
+    },
+    "pet": {
+      "species": "dog",
+      "name": "Pipa",
+      "description": {
+        "gender": "female",
+        "color": "Marrón",
+        "identifyingFeature": "Corte en la oreja"
+      }
+    },
+    "location": {
+      "city": "Rosario",
+      "zone": "Bv. Oroño 100"
+    },
+    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
+    "images": ["/dog-sample.jpg"],
+    "state": "lost",
+    "date": "08-10-2020",
+    "createdAt": "11-10-2020",
+    "updatedAt": "11-10-2020",
+    "deleted": false
+  },
+
+  {
+    "id": 1,
+    "user": {
+      "image": "/person-avatar-2.jpg",
+      "firstName": "Fernanda",
+      "lastName": "González",
+      "phone": "5493415080085"
+    },
+    "pet": {
+      "name": "Michi",
+      "species": "cat",
+      "description": {
+        "gender": "male",
+        "color": "Gris",
+        "identifyingFeature": "Mancha blanca en el hocico"
+      }
+    },
+    "location": {
+      "city": "Capital Federal",
+      "zone": "Av. Libertador 1100"
+    },
+    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
+    "images": ["/cat-sample.jpg"],
+    "state": "lost",
+    "date": "30-09-2020",
+    "createdAt": "02-10-2020",
+    "updatedAt": "02-10-2020",
+    "deleted": false
+  },
+
+  {
+    "id": 2,
+    "user": {
+      "image": "/person-avatar-3.jpg",
+      "firstName": "Mario",
+      "lastName": "Perez",
+      "phone": "5493415080085"
+    },
+    "pet": {
+      "name": "Tito",
+      "species": "dog",
+      "description": {
+        "gender": "male",
+        "color": "Negro",
+        "identifyingFeature": "Mancha blanca en el pecho"
+      }
+    },
+    "location": {
+      "city": "Mendoza",
+      "zone": "Calle del vino 300"
+    },
+    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
+    "images": ["/dog-sample-2.jpg"],
+    "state": "lost",
+    "date": "01-10-2020",
+    "createdAt": "08-10-2020",
+    "updatedAt": "08-10-2020",
+    "deleted": false
+  },
+
+  {
+    "id": 3,
+    "user": {
+      "image": "/person-avatar-3.jpg",
+      "firstName": "Federico",
+      "lastName": "Alvear",
+      "phone": "5493415080085"
+    },
+    "pet": {
+      "name": "Cacho",
+      "species": "dog",
+      "description": {
+        "gender": "male",
+        "color": "Negro",
+        "identifyingFeature": "Mancha blanca en el pecho"
+      }
+    },
+    "location": {
+      "city": "Villa Gobernador Gálvez",
+      "zone": "La avenida 2800"
+    },
+    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
+    "images": ["/dog-sample-2.jpg"],
+    "state": "found",
+    "date": "01-10-2020",
+    "createdAt": "02-10-2020",
+    "updatedAt": "02-10-2020",
+    "deleted": false
+  },
+
+  {
+    "id": 4,
+    "user": {
+      "image": "/person-avatar-3.jpg",
+      "firstName": "Mario",
+      "lastName": "Perez",
+      "phone": "5493415080085"
+    },
+    "pet": {
+      "name": "Wendy",
+      "species": "other",
+      "description": {
+        "gender": "female",
+        "color": "Negro",
+        "identifyingFeature": "Mancha blanca en el pecho"
+      }
+    },
+    "location": {
+      "city": "Santa Fe",
+      "zone": "Av. Siemprefalsa 123"
+    },
+    "text": "Lorem ipsum ipsum sumpi ipsum mupsi pumsi jaja dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
+    "images": ["/dog-sample-2.jpg"],
+    "state": "found",
+    "date": "05-10-2020",
+    "createdAt": "10-10-2020",
+    "updatedAt": "10-10-2020",
+    "deleted": false
+  }
+]
