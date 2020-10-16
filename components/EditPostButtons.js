@@ -18,7 +18,7 @@ export default function EditPostButtons({ deleteFn, editFn }) {
     <div className="flex items-center w-40">
       {buttons.map(({ icon, onClick }) => {
         return (
-          <Button spaced variant="terciary" onClick={onClick}>
+          <Button key={icon} spaced variant="terciary" onClick={onClick}>
             <FontAwesomeIcon icon={icons[icon]} />
           </Button>
         );

@@ -7,7 +7,7 @@ export default async (req, res) => {
       try {
         new Post(req.body).save((err, addedPost) => {
           if (err) return console.log(err);
-          res.status(200).json(addedPost);
+          return res.status(200).json(addedPost);
         });
       } catch (error) {
         return res.status(400).json({ error });
@@ -22,7 +22,11 @@ export default async (req, res) => {
       break;
     case "DELETE":
       try {
-        return res.status(200).json({ resp: "deleted" });
+        const { _id } = req.body;
+        Post.updateOne({ _id }, { deleted: true }, {}, (err) => {
+          if (err) return console.log(err);
+          return res.status(200).send(`Deleted ${_id}`);
+        });
       } catch (error) {
         return res.status(400).json({ error });
       }
