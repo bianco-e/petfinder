@@ -6,7 +6,7 @@ export default initAuth0({
   clientSecret: process.env.AUTH0_SECRET,
   scope: "openid profile",
   redirectUri: process.env.APP_DOMAIN
-    ? `${process.env.APP_DOMAIN}/api/callback`
+    ? `${process.env.APP_DOMAIN}api/callback`
     : `http://localhost:3000/api/callback`,
   postLogoutRedirectUri: process.env.APP_DOMAIN || `http://localhost:3000/`,
   session: {
