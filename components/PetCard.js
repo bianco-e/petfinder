@@ -37,9 +37,10 @@ export default function PetCard({ data, editable, variant = "normal" }) {
       >
         <div className="mb-8 text-xs text-orange-900">
           <p className="font-medium">{location.city}</p>
-          <span className="text-gray-800">
-            Se {state == "lost" ? "perdió" : "encontró"} el{" "}
+          <span className="font-bold bg-orange-400 rounded-sm px-1">
+            {state == "lost" ? "Perdido" : "Encontrado"}
           </span>
+          <span className="text-gray-800"> el </span>
           <span className="font-bold">{date} </span>
           <span className="text-gray-800">en </span>
           <span className="font-bold">{location.zone}</span>

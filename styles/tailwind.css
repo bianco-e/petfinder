@@ -9,6 +9,9 @@
   h2 {
     @apply font-bold text-xl m-2;
   }
+  hr {
+    @apply w-full border-orange-900 mt-5 mb-1 border-opacity-50;
+  }
   input {
     @apply font-medium shadow-sm rounded-sm h-10 text-center p-2 text-orange-900 bg-transparent border border-solid border-orange-900;
   }
