@@ -50,7 +50,8 @@ export const filtersData = [
 
 export class Post {
   constructor(
-    image,
+    userId,
+    avatar,
     firstName,
     lastName,
     phone,
@@ -68,7 +69,8 @@ export class Post {
     date
   ) {
     (this.user = {
-      image,
+      id: userId,
+      avatar,
       firstName,
       lastName,
       phone,

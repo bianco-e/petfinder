@@ -23,7 +23,7 @@ export default function CheckOption({ options, defaultValue }) {
                 value == selected && selectedClass
               }`}
             >
-              <p>{title}</p>
+              <span>{title}</span>
             </button>
           </div>
         );

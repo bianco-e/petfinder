@@ -10,7 +10,7 @@ export default function Home({ posts }) {
     species: { value: undefined, title: undefined },
     state: { value: undefined, title: undefined },
   });
-  const [pets, setPets] = useState(posts);
+  const [pets, setPets] = useState();
   const setFilter = (prop, title, value) => {
     const newAppliedFilters = {
       ...appliedFilters,
@@ -34,14 +34,14 @@ export default function Home({ posts }) {
           newAppliedFilters.state.value === state)
       );
     });
-    // this should be filtered from db comparing if data properties equal object sent properties
+    // this is a sample, it should be filtered from db
     setPets(filteredPets);
   };
 
   return (
     <>
       <MainFilter setFilter={setFilter} appliedFilters={appliedFilters} />
-      <Pets pets={pets} />
+      <Pets pets={pets || posts} />
     </>
   );
 }
@@ -49,7 +49,6 @@ export default function Home({ posts }) {
 export async function getStaticProps(context) {
   // Debería usar getStatic o getServerSide ? Se que siempre voy a hacer el mismo get
   // independientemente de la acción del usuario, pero qué va a pasar cuando implemente el filter?
-
   /* getStaticProps hace que no se geteen los cambios recientes en la db? --> al retornar props
   se puede setear otra propiedad (revalidate) que es un number, e indica cada cuantos segundos
   se debería hacer un refetch */

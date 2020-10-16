@@ -1,7 +1,8 @@
+import postsAPI from "../../../db/posts/api";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import PostForm from "../components/PostForm";
-export default function Post({ user }) {
+import PostForm from "../../../components/PostForm";
+export default function PostEdit({ post }) {
   const router = useRouter();
   useEffect(() => {
     fetch("/api/me")
@@ -18,21 +19,21 @@ export default function Post({ user }) {
   );
 }
 
-/* export async function getServerSideProps(context) {
+export async function getServerSideProps({ params }) {
+  const { postId } = params;
   try {
-    const res = await fetch("http://localhost:3000/api/me");
-    const user = await res.json();
+    const post = await postsAPI.getFilteredDataBy({ _id: postId });
     return {
       props: {
-        user: user,
+        post,
       },
     };
   } catch (error) {
     console.log(error);
     return {
       props: {
-        user: null,
+        post: null,
       },
     };
   }
-} */
+}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import TextArea from "./TextArea";
 import Select from "./Select";
@@ -7,8 +7,39 @@ import PageTitle from "./PageTitle";
 import provinces from "../provinces.json";
 import { Post } from "../utils/utils";
 
-export default function PostForm({}) {
-  const [state, setState] = useState({ title: "perdí", value: "lost" });
+const emptyData = {
+  user: {
+    id: "",
+    avatar: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+  },
+  pet: {
+    name: "",
+    species: "",
+    description: {
+      gender: "",
+      color: "",
+      identifyingFeature: "",
+    },
+  },
+  location: {
+    province: "",
+    city: "",
+    zone: "",
+  },
+  text: "",
+  images: [],
+  state: "",
+  date: "",
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  deleted: false,
+};
+
+export default function PostForm({ postData }) {
+  const [state, setState] = useState({ title: "Perdí", value: "lost" });
   const [species, setSpecies] = useState("");
   const [gender, setGender] = useState("");
   const [images, setImages] = useState([]);
@@ -22,6 +53,18 @@ export default function PostForm({}) {
   const [zone, setZone] = useState("");
   const [phone, setPhone] = useState("");
 
+  /*  useEffect(() => {
+    if (postData) {
+      setState({ title: "", value: postData.state });
+      setSpecies(postData.pet.species);
+      setGender(postData.pet.description.gender);
+      setImages(postData.images);
+      setDate(postData.date);
+      setText(postData.text);
+      setName(postData.pet.name);
+    }
+  }, []);
+ () => setPost({...post, pet: {...pet, name: e.target.value}}) */
   const inputsData = [
     { ph: "Nombre", value: name, onChange: (e) => setName(e.target.value) },
     { ph: "Color", value: color, onChange: (e) => setColor(e.target.value) },
@@ -49,6 +92,7 @@ export default function PostForm({}) {
 
   const handlePost = () => {
     const post = new Post(
+      "016952318715324",
       "/person-avatar-1.jpg",
       "Jorge",
       "Pusineri",
