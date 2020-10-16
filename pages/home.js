@@ -3,16 +3,14 @@ import auth0 from "../utils/auth0";
 import MainFilter from "../components/MainFilter";
 import Pets from "../components/Pets";
 import postsAPI from "../db/posts/api";
-import mockedData from "../mockedData.json";
 
-export default function Home({ user, posts }) {
-  console.log(posts);
+export default function Home({ posts }) {
   const [appliedFilters, setAppliedFilters] = useState({
     city: { value: undefined, title: undefined },
     species: { value: undefined, title: undefined },
     state: { value: undefined, title: undefined },
   });
-  const [pets, setPets] = useState(mockedData);
+  const [pets, setPets] = useState(posts);
   const setFilter = (prop, title, value) => {
     const newAppliedFilters = { ...appliedFilters, [prop]: { title, value } };
     setAppliedFilters(newAppliedFilters);
@@ -20,7 +18,7 @@ export default function Home({ user, posts }) {
   };
 
   const filterPets = (newAppliedFilters) => {
-    const filteredPets = mockedData.filter(({ location, pet, state }) => {
+    const filteredPets = posts.filter(({ location, pet, state }) => {
       return (
         (!newAppliedFilters.city.value ||
           newAppliedFilters.city.value === location.city) &&
@@ -37,7 +35,7 @@ export default function Home({ user, posts }) {
   return (
     <>
       <MainFilter setFilter={setFilter} appliedFilters={appliedFilters} />
-      <Pets pets={posts} />
+      <Pets pets={pets} />
     </>
   );
 }

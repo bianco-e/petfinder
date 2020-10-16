@@ -29,8 +29,11 @@ export default function Nav({}) {
         </Button>
       ) : (
         <div className="w-56 flex justify-between relative">
-          {router.pathname !== "/post" ? (
-            <Button onClick={() => router.push("/post")} variant="secondary">
+          {router.pathname !== "/new-post" ? (
+            <Button
+              onClick={() => router.push("/new-post")}
+              variant="secondary"
+            >
               Publicar
             </Button>
           ) : (

@@ -1,14 +1,8 @@
-import { useRouter } from "next/router";
+import postsAPI from "../../db/posts/api";
 import Pets from "../../components/Pets";
 import PageTitle from "../../components/PageTitle";
-import mockedData from "../../mockedData.json";
 
-export default function MyPosts({ posts = [] }) {
-  const router = useRouter();
-  const { userId } = router.query;
-  const myPosts = mockedData.filter(
-    ({ user }) => `google-oauth2|${user.userId}` === userId
-  );
+export default function MyPosts({ myPosts }) {
   return (
     <>
       <PageTitle title="Mis publicaciones" />
@@ -17,8 +11,13 @@ export default function MyPosts({ posts = [] }) {
   );
 }
 
-/* export async function getServerSideProps(context) {
-  const res = await API.Posts.fetch(userId);
-  const posts = res.json();
-  return { posts };
-}; */
+export async function getServerSideProps({ query }) {
+  const [header, userId] = query.userId.split("|");
+  try {
+    const myPosts = await postsAPI.getFilteredDataBy({ "user.id": userId });
+    return { props: { myPosts } };
+  } catch (error) {
+    console.log(error);
+    return { props: { myPosts: [] } };
+  }
+}

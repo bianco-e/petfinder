@@ -57,7 +57,7 @@ export default function PetCard({ data, editable, variant = "normal" }) {
           <div className="flex items-center">
             <img
               className="w-10 h-10 rounded-full mr-1"
-              src={user.image}
+              src={user.avatar}
               alt={`Avatar de ${user.firstName}`}
             />
             <div className="text-xs">
