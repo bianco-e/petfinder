@@ -28,7 +28,7 @@ export default function Introduction() {
             variant="secondary"
             onClick={() => router.push("/home")}
           >
-            Ingresar a ver
+            Explorar
           </Button>
         </div>
       </div>

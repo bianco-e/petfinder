@@ -1,7 +1,7 @@
 import { useState } from "react";
 import auth0 from "../utils/auth0";
-import MainFilter from "../components/MainFilter";
 import Pets from "../components/Pets";
+import MainFilter from "../components/MainFilter";
 import postsAPI from "../db/posts/api";
 
 export default function Home({ posts }) {
@@ -46,16 +46,20 @@ export default function Home({ posts }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  // Implementar React Query en un futuro
+export async function getStaticProps(context) {
+  // Debería usar getStatic o getServerSide ? Se que siempre voy a hacer el mismo get
+  // independientemente de la acción del usuario, pero qué va a pasar cuando implemente el filter?
+
+  /* getStaticProps hace que no se geteen los cambios recientes en la db? --> al retornar props
+  se puede setear otra propiedad (revalidate) que es un number, e indica cada cuantos segundos
+  se debería hacer un refetch */
   try {
-    const filters = {};
-    const filteredPosts = await postsAPI.getFilteredDataBy(filters);
-    const session = await auth0.getSession(context.req);
+    const filteredPosts = await postsAPI.getFilteredDataBy({});
+    // const session = await auth0.getSession(context.req);
     return {
       props: {
         posts: filteredPosts,
-        user: session?.user || null,
+        // user: session?.user || null,
       },
     };
   } catch (error) {
