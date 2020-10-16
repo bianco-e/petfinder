@@ -12,7 +12,13 @@ export default function Home({ posts }) {
   });
   const [pets, setPets] = useState(posts);
   const setFilter = (prop, title, value) => {
-    const newAppliedFilters = { ...appliedFilters, [prop]: { title, value } };
+    const newAppliedFilters = {
+      ...appliedFilters,
+      [prop]: {
+        title,
+        value: appliedFilters[prop].value == value ? undefined : value,
+      },
+    };
     setAppliedFilters(newAppliedFilters);
     filterPets(newAppliedFilters);
   };
