@@ -8,7 +8,6 @@ import ProfileDropdown from "./ProfileDropdown";
 export default function Nav({}) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [user, setUser] = useState();
-
   const router = useRouter();
 
   const goToMyPosts = () => router.push(`/myposts/${user?.sub}`);
@@ -22,7 +21,7 @@ export default function Nav({}) {
 
   return (
     <nav className="navBar sticky top-0">
-      <Logo text={!user} />
+      <Logo text={!user} route={user ? "/home" : "/"} />
       {!user ? (
         <Button onClick={() => router.push("/api/login")}>
           Iniciar sesión

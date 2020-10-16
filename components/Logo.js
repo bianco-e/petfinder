@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 
-export default function Logo({ text }) {
+export default function Logo({ text, route }) {
   const router = useRouter();
   return (
     <div
       className="flex items-center cursor-pointer"
-      onClick={() => router.push("/")}
+      onClick={() => router.push(route)}
     >
       <div
         className="w-10 h-10 rounded-full"
