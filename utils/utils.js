@@ -42,6 +42,21 @@ export function formatDate(date) {
   });
 }
 
+const allValuesAreTruthy = (obj) => Object.values(obj).every((val) => val);
+export const validateFields = (object) => {
+  const { text, state, images, pet, location } = object;
+  if (
+    text &&
+    state &&
+    images.length &&
+    allValuesAreTruthy(location) &&
+    allValuesAreTruthy(pet) &&
+    allValuesAreTruthy(pet.description)
+  ) {
+    return true;
+  } else return false;
+};
+
 export const filtersData = [
   [
     { title: "Perdidos", value: "lost", filterType: "state" },
@@ -77,7 +92,7 @@ export const emptyPost = {
     zone: "",
   },
   text: "",
-  images: [],
+  images: [""],
   state: "lost",
   date: new Date(),
   createdAt: new Date(),

@@ -5,7 +5,7 @@ import Select from "./Select";
 import PostFormHeader from "./PostFormHeader";
 import PageTitle from "./PageTitle";
 import provinces from "../provinces.json";
-import { Post, emptyPost } from "../utils/utils";
+import { Post, emptyPost, validateFields } from "../utils/utils";
 import { addPost, editPost, getUserInfo } from "../apiQueries/apiQueries";
 
 export default function PostForm({ editingPost }) {
@@ -116,8 +116,9 @@ export default function PostForm({ editingPost }) {
               phone: user.phone,
             },
           });
-          console.log(newPost);
-          postId ? editPost(postId, newPost) : addPost(newPost);
+          if (validateFields(newPost)) {
+            postId ? editPost(postId, newPost) : addPost(newPost);
+          }
         }
       })
       .catch((err) => console.error(err));
