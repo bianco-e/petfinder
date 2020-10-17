@@ -24,7 +24,6 @@ export default function Introduction() {
           </Button>
           <Button
             spaced
-            xl
             variant="secondary"
             onClick={() => router.push("/home")}
           >

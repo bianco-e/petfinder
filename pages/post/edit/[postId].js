@@ -14,7 +14,7 @@ export default function PostEdit({ post }) {
   }, []);
   return (
     <>
-      <PostForm />
+      <PostForm editingPost={post} />
     </>
   );
 }
@@ -22,7 +22,7 @@ export default function PostEdit({ post }) {
 export async function getServerSideProps({ params }) {
   const { postId } = params;
   try {
-    const post = await postsAPI.getFilteredDataBy({ _id: postId });
+    const [post] = await postsAPI.getFilteredDataBy({ _id: postId });
     return {
       props: {
         post,

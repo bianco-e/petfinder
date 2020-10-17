@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icons } from "../utils/utils";
+import { icons, formatDate } from "../utils/utils";
 import { deletePost } from "../apiQueries/apiQueries";
 import { useRouter } from "next/router";
 import EditPostButtons from "./EditPostButtons";
@@ -41,7 +41,7 @@ export default function PetCard({ data, editable, variant = "normal" }) {
             {state == "lost" ? "Perdido" : "Encontrado"}
           </span>
           <span className="text-gray-800"> el </span>
-          <span className="font-bold">{date} </span>
+          <span className="font-bold">{formatDate(date)} </span>
           <span className="text-gray-800">en </span>
           <span className="font-bold">{location.zone}</span>
           <div className="text-gray-800 flex items-center justify-between font-bold text-xl my-1">
@@ -60,7 +60,7 @@ export default function PetCard({ data, editable, variant = "normal" }) {
             <img
               className="w-10 h-10 rounded-full mr-1"
               src={user.avatar}
-              alt={`Avatar de ${user.firstName}`}
+              alt={`Avatar ${user.firstName}`}
             />
             <div className="text-xs">
               <p className="text-orange-900 leading-none">{user.firstName}</p>

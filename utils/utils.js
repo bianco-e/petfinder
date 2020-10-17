@@ -27,6 +27,12 @@ export const icons = {
   delete: faTrash,
   edit: faEdit,
 };
+export const formatDateToSetValue = (date) =>
+  date
+    .toLocaleDateString("zh-Hans-CN")
+    .split("/")
+    .map((number) => (number.length == 1 ? `0${number}` : number))
+    .join("-");
 
 export function formatDate(date) {
   return new Date(date).toLocaleDateString("es-ES", {
@@ -48,54 +54,59 @@ export const filtersData = [
   ],
 ];
 
+export const emptyPost = {
+  user: {
+    id: "",
+    avatar: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+  },
+  pet: {
+    name: "",
+    species: "",
+    description: {
+      gender: "",
+      color: "",
+      identifyingFeature: "",
+    },
+  },
+  location: {
+    province: "",
+    city: "",
+    zone: "",
+  },
+  text: "",
+  images: [],
+  state: "lost",
+  date: new Date(),
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  deleted: false,
+};
 export class Post {
-  constructor(
-    userId,
-    avatar,
-    firstName,
-    lastName,
-    phone,
-    name,
-    species,
-    gender,
-    color,
-    identifyingFeature,
-    province,
-    city,
-    zone,
-    text,
+  constructor({
+    pet,
     images,
+    user,
+    location,
+    text,
     state,
-    date
-  ) {
-    (this.user = {
-      id: userId,
-      avatar,
-      firstName,
-      lastName,
-      phone,
-    }),
-      (this.pet = {
-        name,
-        species,
-        description: {
-          gender,
-          color,
-          identifyingFeature,
-        },
-      }),
-      (this.location = {
-        province,
-        city,
-        zone,
-      }),
-      (this.text = text),
-      (this.images = images),
-      (this.state = state),
-      (this.date = date),
-      (this.createdAt = new Date()),
-      (this.updatedAt = new Date()),
-      (this.deleted = false);
+    date,
+    createdAt,
+    updatedAt,
+    deleted,
+  }) {
+    this.user = user;
+    this.pet = pet;
+    this.location = location;
+    this.text = text;
+    this.images = images;
+    this.state = state;
+    this.date = date;
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+    this.deleted = false;
   }
 }
 

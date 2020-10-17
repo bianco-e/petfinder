@@ -12,7 +12,7 @@ export default function MyPosts({ myPosts }) {
 }
 
 export async function getServerSideProps({ params }) {
-  const [idHeader, userId] = params.userId.split("|");
+  const { userId } = params;
   try {
     const myPosts = await postsAPI.getFilteredDataBy({ "user.id": userId });
     return { props: { myPosts } };

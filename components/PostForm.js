@@ -5,124 +5,140 @@ import Select from "./Select";
 import PostFormHeader from "./PostFormHeader";
 import PageTitle from "./PageTitle";
 import provinces from "../provinces.json";
-import { Post } from "../utils/utils";
+import { Post, emptyPost } from "../utils/utils";
+import { addPost, editPost, getUserInfo } from "../apiQueries/apiQueries";
 
-const emptyData = {
-  user: {
-    id: "",
-    avatar: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-  },
-  pet: {
-    name: "",
-    species: "",
-    description: {
-      gender: "",
-      color: "",
-      identifyingFeature: "",
-    },
-  },
-  location: {
-    province: "",
-    city: "",
-    zone: "",
-  },
-  text: "",
-  images: [],
-  state: "",
-  date: "",
-  createdAt: new Date(),
-  updatedAt: new Date(),
-  deleted: false,
-};
+export default function PostForm({ editingPost }) {
+  const [post, setPost] = useState(emptyPost);
+  const { pet, images, user, location, text, state, date, updatedAt } = post;
 
-export default function PostForm({ postData }) {
-  const [state, setState] = useState({ title: "Perdí", value: "lost" });
-  const [species, setSpecies] = useState("");
-  const [gender, setGender] = useState("");
-  const [images, setImages] = useState([]);
-  const [date, setDate] = useState("");
-  const [text, setText] = useState("");
-  const [name, setName] = useState("");
-  const [color, setColor] = useState("");
-  const [identifyingFeature, setIdentifyingFeature] = useState("");
-  const [province, setProvince] = useState("");
-  const [city, setCity] = useState("");
-  const [zone, setZone] = useState("");
-  const [phone, setPhone] = useState("");
+  useEffect(() => editingPost && setPost(editingPost), []);
 
-  /*  useEffect(() => {
-    if (postData) {
-      setState({ title: "", value: postData.state });
-      setSpecies(postData.pet.species);
-      setGender(postData.pet.description.gender);
-      setImages(postData.images);
-      setDate(postData.date);
-      setText(postData.text);
-      setName(postData.pet.name);
-    }
-  }, []);
- () => setPost({...post, pet: {...pet, name: e.target.value}}) */
+  const setDate = (value) => setPost({ ...post, date: value });
+  const setState = (value) => setPost({ ...post, state: value });
+  const setSpecies = (value) =>
+    setPost({ ...post, pet: { ...pet, species: value } });
+  const setGender = (value) =>
+    setPost({
+      ...post,
+      pet: {
+        ...pet,
+        description: { ...pet.description, gender: value },
+      },
+    });
+  const setProvince = (value) =>
+    setPost({
+      ...post,
+      location: { ...post.location, province: value },
+    });
+  const setCity = (value) =>
+    setPost({ ...post, location: { ...post.location, city: value } });
+  const setText = (value) => setPost({ ...post, text: value });
   const inputsData = [
-    { ph: "Nombre", value: name, onChange: (e) => setName(e.target.value) },
-    { ph: "Color", value: color, onChange: (e) => setColor(e.target.value) },
+    {
+      ph: "Nombre",
+      value: pet.name,
+      onChange: (e) =>
+        setPost({ ...post, pet: { ...post.pet, name: e.target.value } }),
+    },
+    {
+      ph: "Color",
+      value: pet.description.color,
+      onChange: (e) =>
+        setPost({
+          ...post,
+          pet: {
+            ...post.pet,
+            description: { ...post.pet.description, color: e.target.value },
+          },
+        }),
+    },
     {
       ph: "Rasgo característico",
-      value: identifyingFeature,
-      onChange: (e) => setIdentifyingFeature(e.target.value),
+      value: pet.description.identifyingFeature,
+      onChange: (e) =>
+        setPost({
+          ...post,
+          pet: {
+            ...post.pet,
+            description: {
+              ...post.pet.description,
+              identifyingFeature: e.target.value,
+            },
+          },
+        }),
     },
-    { ph: "Zona", value: zone, onChange: (e) => setZone(e.target.value) },
+    {
+      ph: "Zona",
+      value: location.zone,
+      onChange: (e) =>
+        setPost({
+          ...post,
+          location: {
+            ...post.location,
+            zone: e.target.value,
+          },
+        }),
+    },
     {
       ph: "Whatsapp (+54 9 ...)",
-      value: phone,
-      onChange: (e) => setPhone(e.target.value),
+      value: user.phone,
+      onChange: (e) =>
+        setPost({
+          ...post,
+          user: {
+            ...post.user,
+            phone: e.target.value,
+          },
+        }),
+    },
+  ];
+  const selectsData = [
+    { name: "province", options: provinces, setter: setProvince },
+    {
+      name: "city",
+      options: ["Ciudad", "Mendoza", "Rosario"],
+      setter: setCity,
     },
   ];
 
-  const selectsData = [
-    provinces,
-    [
-      { title: "Ciudad", value: "" },
-      { title: "Capital Federal", value: "Capital Federal" },
-      { title: "Rosario", value: "Rosario" },
-    ],
-  ];
+  const handlePost = (postId) =>
+    getUserInfo()
+      .then(({ sub, given_name, family_name, picture, error }) => {
+        if (!error) {
+          const newPost = new Post({
+            ...post,
+            user: {
+              id: sub,
+              firstName: given_name,
+              lastName: family_name,
+              avatar: picture,
+              phone: user.phone,
+            },
+          });
+          console.log(newPost);
+          postId ? editPost(postId, newPost) : addPost(newPost);
+        }
+      })
+      .catch((err) => console.error(err));
 
-  const handlePost = () => {
-    const post = new Post(
-      "016952318715324",
-      "/person-avatar-1.jpg",
-      "Jorge",
-      "Pusineri",
-      phone,
-      name,
-      species,
-      gender,
-      color,
-      identifyingFeature,
-      province,
-      city,
-      zone,
-      text,
-      images,
-      state,
-      date
-    );
-    console.log(post);
-  };
   return (
     <>
       <PageTitle title="Nueva publicación" />
       <div className="bg-orange-100 flex flex-col w-full items-center py-4">
         <PostFormHeader
-          date={date}
+          date={new Date(date)}
+          gender={editingPost?.pet.description.gender || pet.description.gender}
+          images={images}
+          species={editingPost?.pet.species || pet.species}
+          state={editingPost?.state || state}
           setDate={setDate}
           setGender={setGender}
+          setImages={(value) => console.log(value)}
           setSpecies={setSpecies}
           setState={setState}
         />
+
         {inputsData.slice(0, 3).map(({ ph, value, onChange }) => {
           return (
             <input
@@ -134,20 +150,22 @@ export default function PostForm({ postData }) {
             />
           );
         })}
+
         <TextArea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Descripción"
         />
-        {selectsData.map((options, idx) => {
-          return (
-            <Select
-              key={options[0].title}
-              options={options}
-              setter={idx === 0 ? setProvince : setCity}
-            />
-          );
-        })}
+
+        {selectsData.map(({ name, options, setter }) => (
+          <Select
+            key={options[0]}
+            options={options}
+            selected={location[name]}
+            setter={setter}
+          />
+        ))}
+
         {inputsData.slice(3).map(({ ph, value, onChange }) => {
           return (
             <input
@@ -159,8 +177,12 @@ export default function PostForm({ postData }) {
             />
           );
         })}
-        <Button variant="terciary" onClick={() => handlePost()}>
-          Publicar
+
+        <Button
+          variant="terciary"
+          onClick={() => (editingPost ? handlePost(post._id) : handlePost())}
+        >
+          Confirmar
         </Button>
       </div>
     </>

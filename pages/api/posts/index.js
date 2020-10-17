@@ -13,9 +13,13 @@ export default async (req, res) => {
         return res.status(400).json({ error });
       }
       break;
-    case "PATCH":
+    case "PUT":
       try {
-        return res.status(200).json({ resp: "patched" });
+        const { _id, newContent } = req.body;
+        Post.replaceOne({ _id }, newContent, {}, (err) => {
+          if (err) return console.log(err);
+          return res.status(200).send(`Updated ${_id}`);
+        });
       } catch (error) {
         return res.status(400).json({ error });
       }

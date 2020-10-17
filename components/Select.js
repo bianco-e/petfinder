@@ -1,13 +1,14 @@
-export default function Select({ options, setter }) {
+export default function Select({ options, selected, setter }) {
   return (
     <div className="inline-block relative w-64 my-4">
       <select
+        value={selected}
         onChange={(e) => setter(e.target.value)}
         className="text-center text-orange-500 cursor-pointer block appearance-none w-full bg-transparent border border-orange-900 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-md"
       >
-        {options.map(({ title, value }) => (
-          <option key={title} value={value}>
-            {title}
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
           </option>
         ))}
       </select>

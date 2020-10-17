@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { getUserInfo } from "../../apiQueries/apiQueries";
 import PostForm from "../../components/PostForm";
 export default function PostNew({ user }) {
   const router = useRouter();
   useEffect(() => {
-    fetch("/api/me")
-      .then((res) => res.json())
-      .then((loggedUser) => {
-        loggedUser.error && router.push("/home");
-      })
+    getUserInfo()
+      .then((logged) => logged.error && router.push("/home"))
       .catch((err) => console.error(err));
   }, []);
   return (
