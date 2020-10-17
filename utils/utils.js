@@ -27,19 +27,15 @@ export const icons = {
   delete: faTrash,
   edit: faEdit,
 };
-export const formatDateToSetValue = (date) =>
-  date
-    .toLocaleDateString("zh-Hans-CN")
-    .split("/")
-    .map((number) => (number.length == 1 ? `0${number}` : number))
-    .join("-");
 
-export function formatDate(date) {
-  return new Date(date).toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "numeric",
-    year: "numeric",
-  });
+export function formatDate(date, forInput) {
+  if (!forInput)
+    return new Date(date).toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+    });
+  return new Date(date).toISOString().split("T")[0];
 }
 
 const allValuesAreTruthy = (obj) => Object.values(obj).every((val) => val);

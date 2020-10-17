@@ -105,7 +105,7 @@ export default function PostForm({ editingPost }) {
   const handlePost = (postId) =>
     getUserInfo()
       .then(({ sub, given_name, family_name, picture, error }) => {
-        if (!error) {
+        if (!error && validateFields(newPost)) {
           const newPost = new Post({
             ...post,
             user: {
@@ -116,9 +116,7 @@ export default function PostForm({ editingPost }) {
               phone: user.phone,
             },
           });
-          if (validateFields(newPost)) {
-            postId ? editPost(postId, newPost) : addPost(newPost);
-          }
+          postId ? editPost(postId, newPost) : addPost(newPost);
         }
       })
       .catch((err) => console.error(err));

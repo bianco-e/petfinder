@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icons, formatDateToSetValue } from "../utils/utils";
+import { icons, formatDate } from "../utils/utils";
 import CheckOption from "./CheckOption";
 
 export default function Component({
@@ -64,7 +64,7 @@ export default function Component({
             className="border-0 shadow-none my-2 p-0 cursor-pointer"
             onChange={(e) => setDate(e.target.value)}
             type="date"
-            value={formatDateToSetValue(date)}
+            value={formatDate(date, true)}
           />
         </div>
         <div className="w-1/2 flex flex-col items-end">

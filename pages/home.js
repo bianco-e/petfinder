@@ -24,7 +24,7 @@ export default function Home({ posts }) {
   };
 
   const filterPets = (newAppliedFilters) => {
-    const filteredPets = posts.filter(({ location, pet, state }) => {
+    const filteredData = posts.filter(({ location, pet, state }) => {
       return (
         (!newAppliedFilters.city.value ||
           newAppliedFilters.city.value === location.city) &&
@@ -36,7 +36,7 @@ export default function Home({ posts }) {
     });
     // fetch(`/api/posts/${JSON.stringify(newAppliedFilters)}`);
     // this is a sample, it should be filtered from db
-    setFilteredPosts(filteredPets);
+    setFilteredPosts(filteredData);
   };
 
   return (
