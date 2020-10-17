@@ -18,13 +18,14 @@
       }
     },
     "location": {
+      "province": "Santa Fe",
       "city": "Rosario",
       "zone": "Bv. Oroño 100"
     },
     "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     "images": ["/dog-sample.jpg"],
     "state": "lost",
-    "date": "08-10-2020",
+    "date": "2020-10-01T03:00:00.000Z",
     "createdAt": "11-10-2020",
     "updatedAt": "11-10-2020",
     "deleted": false
@@ -49,13 +50,14 @@
       }
     },
     "location": {
+      "province": "Buenos Aires",
       "city": "Capital Federal",
       "zone": "Av. Libertador 1100"
     },
     "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     "images": ["/cat-sample.jpg"],
     "state": "lost",
-    "date": "30-09-2020",
+    "date": "2020-10-11T03:00:00.000Z",
     "createdAt": "02-10-2020",
     "updatedAt": "02-10-2020",
     "deleted": false
@@ -80,13 +82,14 @@
       }
     },
     "location": {
+      "province": "Mendoza",
       "city": "Mendoza",
       "zone": "Calle del vino 300"
     },
     "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.",
     "images": ["/dog-sample-2.jpg"],
     "state": "lost",
-    "date": "01-10-2020",
+    "date": "2020-09-21T03:00:00.000Z",
     "createdAt": "08-10-2020",
     "updatedAt": "08-10-2020",
     "deleted": false

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { icons, formatDate } from "../utils/utils";
 import { deletePost } from "../apiQueries/apiQueries";
@@ -10,21 +11,41 @@ const style = {
     container: "sm:w-full lg:w-1/4",
     image: "h-56",
     details: "",
-    text: "",
   },
   normal: {
     container: "w-full lg:flex",
     image: "h-64 lg:w-64 lg:rounded-t-none lg:rounded-l",
     details:
       "lg:w-4/5 shadow-lg lg:border-l-0 lg:border-t lg:rounded-b-none lg:rounded-r",
-    text: "",
   },
+};
+const stateText = {
+  lost: "Perdid",
+  found: "Encontrad",
+  male: "o",
+  female: "a",
 };
 
 export default function PetCard({ data, editable, variant = "normal" }) {
   const { images, user, pet, date, text, location, state, _id } = data;
+  const [textHeight, setTextHeight] = useState({
+    height: "h-10",
+    arrow: undefined,
+  });
   const router = useRouter();
+  const textRef = useRef();
   const message = `¡Hola! Te contacto por la publicación de Petfinder ${router.route}`;
+  const resizeText = () =>
+    textHeight.height === "h-10"
+      ? setTextHeight({ height: "h-auto", arrow: "upArrow" })
+      : setTextHeight({ height: "h-10", arrow: "downArrow" });
+
+  useEffect(() => {
+    if (textRef.current.scrollHeight > 42) {
+      setTextHeight({ ...textHeight, arrow: "downArrow" });
+    }
+  }, []);
+
   return (
     <div className={`${style[variant].container} my-4`}>
       <div
@@ -36,9 +57,11 @@ export default function PetCard({ data, editable, variant = "normal" }) {
         className={`${style[variant].details} rounded-b p-4 flex flex-col justify-between bg-white border-r border-b border-l border-gray-400`}
       >
         <div className="mb-8 text-xs text-orange-900">
-          <p className="font-medium">{location.city}</p>
+          <p className="font-medium">
+            {location.city}, {location.province}
+          </p>
           <span className="font-bold bg-orange-400 rounded-sm px-1">
-            {state == "lost" ? "Perdido" : "Encontrado"}
+            {stateText[state] + stateText[pet.description.gender]}
           </span>
           <span className="text-gray-800"> el </span>
           <span className="font-bold">{formatDate(date)} </span>
@@ -51,9 +74,19 @@ export default function PetCard({ data, editable, variant = "normal" }) {
             </div>
             <FontAwesomeIcon icon={icons[pet.description.gender]} />
           </div>
-          <p className={`${style[variant].text} text-gray-700 text-sm`}>
+          <p
+            className={`text-gray-700 text-sm transition-all duration-500 overflow-hidden ${textHeight.height}`}
+            ref={textRef}
+          >
             {text}
           </p>
+          {textHeight.arrow ? (
+            <button className="text-center w-full text-xl" onClick={resizeText}>
+              <FontAwesomeIcon icon={icons[textHeight.arrow]} />
+            </button>
+          ) : (
+            <div className="h-6"></div>
+          )}
         </div>
         <div className="flex items-center w-full justify-between">
           <div className="flex items-center">

@@ -124,65 +124,72 @@ export default function PostForm({ editingPost }) {
   return (
     <>
       <PageTitle title="Nueva publicación" />
-      <div className="bg-orange-100 flex flex-col w-full items-center py-4">
-        <PostFormHeader
-          date={new Date(date)}
-          gender={editingPost?.pet.description.gender || pet.description.gender}
-          images={images}
-          species={editingPost?.pet.species || pet.species}
-          state={editingPost?.state || state}
-          setDate={setDate}
-          setGender={setGender}
-          setImages={(value) => console.log(value)}
-          setSpecies={setSpecies}
-          setState={setState}
-        />
-
-        {inputsData.slice(0, 3).map(({ ph, value, onChange }) => {
-          return (
-            <input
-              className="placeholder-orange-500 focus:shadow-md my-4"
-              key={ph}
-              onChange={(e) => onChange(e)}
-              value={value}
-              placeholder={ph}
-            />
-          );
-        })}
-
-        <TextArea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Descripción"
-        />
-
-        {selectsData.map(({ name, options, setter }) => (
-          <Select
-            key={options[0]}
-            options={options}
-            selected={location[name]}
-            setter={setter}
+      <div
+        className="bg-orange-200 bg-opacity-75 w-full"
+        style={{ backgroundImage: "url('/pattern-asset.png')" }}
+      >
+        <div className="bg-orange-200 bg-opacity-75 flex flex-col w-full items-center pb-4">
+          <PostFormHeader
+            date={new Date(date)}
+            gender={
+              editingPost?.pet.description.gender || pet.description.gender
+            }
+            images={images}
+            species={editingPost?.pet.species || pet.species}
+            state={editingPost?.state || state}
+            setDate={setDate}
+            setGender={setGender}
+            setImages={(value) => console.log(value)}
+            setSpecies={setSpecies}
+            setState={setState}
           />
-        ))}
 
-        {inputsData.slice(3).map(({ ph, value, onChange }) => {
-          return (
-            <input
-              className="placeholder-orange-500 focus:shadow-md my-4"
-              key={ph}
-              onChange={(e) => onChange(e)}
-              value={value}
-              placeholder={ph}
+          {inputsData.slice(0, 3).map(({ ph, value, onChange }) => {
+            return (
+              <input
+                className="lg:w-1/3 placeholder-orange-500 bg-orange-100 focus:shadow-md my-4"
+                key={ph}
+                onChange={(e) => onChange(e)}
+                value={value}
+                placeholder={ph}
+              />
+            );
+          })}
+
+          <TextArea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Descripción"
+          />
+
+          {selectsData.map(({ name, options, setter }) => (
+            <Select
+              key={options[0]}
+              options={options}
+              selected={location[name]}
+              setter={setter}
             />
-          );
-        })}
+          ))}
 
-        <Button
-          variant="terciary"
-          onClick={() => (editingPost ? handlePost(post._id) : handlePost())}
-        >
-          Confirmar
-        </Button>
+          {inputsData.slice(3).map(({ ph, value, onChange }) => {
+            return (
+              <input
+                className="lg:w-1/3 placeholder-orange-500 bg-orange-100 focus:shadow-md my-4"
+                key={ph}
+                onChange={(e) => onChange(e)}
+                value={value}
+                placeholder={ph}
+              />
+            );
+          })}
+
+          <Button
+            variant="terciary"
+            onClick={() => (editingPost ? handlePost(post._id) : handlePost())}
+          >
+            Confirmar
+          </Button>
+        </div>
       </div>
     </>
   );

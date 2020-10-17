@@ -57,18 +57,16 @@ export default function Component({
       })}
       <div className="flex justify-between items-start w-64">
         <div className="w-1/2 flex flex-col items-start">
-          <span className="font-medium text-orange-500 capitalize">
-            ¿Cuándo?
-          </span>
+          <span className="font-bold text-orange-900 capitalize">¿Cuándo?</span>
           <input
-            className="border-0 shadow-none my-2 p-0 cursor-pointer"
+            className="border-0 shadow-none my-2 p-0 cursor-pointer font-bold"
             onChange={(e) => setDate(e.target.value)}
             type="date"
             value={formatDate(date, true)}
           />
         </div>
         <div className="w-1/2 flex flex-col items-end">
-          <span className="font-medium text-orange-500">Imágenes</span>
+          <span className="font-bold text-orange-900">Imágenes</span>
           <label className="flex flex-col items-center cursor-pointer">
             <p className="flex items-center justify-center p-2 text-4xl text-orange-900">
               <FontAwesomeIcon icon={icons.blankImage} />

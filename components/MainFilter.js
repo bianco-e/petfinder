@@ -9,7 +9,7 @@ export default function MainFilter({ appliedFilters, setFilter }) {
 
   return (
     <div className="w-full py-2 flex flex-col items-center bg-orange-500 text-orange-100">
-      <h2 className="my-0 text-2xl">Filtrar búsqueda</h2>
+      <h2 className="my-0 text-lg lg:text-xl">Filtrar búsqueda</h2>
       <LocationInput setFilter={setFilter} />
       <div className="lg:w-2/3 w-full flex items-center justify-between">
         <button

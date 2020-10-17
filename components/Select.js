@@ -1,6 +1,6 @@
 export default function Select({ options, selected, setter }) {
   return (
-    <div className="inline-block relative w-64 my-4">
+    <div className="lg:w-1/3 inline-block relative w-64 bg-orange-100 my-4">
       <select
         value={selected}
         onChange={(e) => setter(e.target.value)}
