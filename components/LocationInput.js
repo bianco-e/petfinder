@@ -10,8 +10,8 @@ export default function LocationInput({ setFilter }) {
   };
   return (
     <input
-      className="placeholder-orange-900 focus:shadow-md"
-      placeholder="Ubicación"
+      className="placeholder-orange-900 focus:shadow-md mt-2 mb-5"
+      placeholder="Ciudad"
       value={locationValue}
       onChange={(e) => setLocationValue(e.target.value)}
       onKeyDown={(e) => handleKeyDown(e)}

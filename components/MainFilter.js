@@ -8,9 +8,9 @@ export default function MainFilter({ appliedFilters, setFilter }) {
   const [dataIndex, setDataIndex] = useState(0);
 
   return (
-    <div className="w-full py-4 flex flex-col items-center bg-orange-500 text-orange-100">
+    <div className="w-full py-2 flex flex-col items-center bg-orange-500 text-orange-100">
+      <h2 className="my-0 text-2xl">Filtrar búsqueda</h2>
       <LocationInput setFilter={setFilter} />
-      <h1>Filtrar por</h1>
       <div className="lg:w-2/3 w-full flex items-center justify-between">
         <button
           className="text-5xl text-orange-900"
