@@ -49,10 +49,10 @@ export default function Home({ posts }) {
         pets={filteredPosts || posts}
         setImagesForSlider={setImagesForSlider}
       />
-      {imagesForSlider.length && (
+      {imagesForSlider.length ? (
         <div className="fixed w-full flex justify-center items-center pb-24 h-screen bg-orange-100 bg-opacity-75">
           <button
-            className="border-2 border-orange-500 shadow-md hover:shadow-inner py-1 px-4 rounded-sm text-orange-500 font-bold lg:text-2xl text-xl absolute right-0 top-0 lg:mr-6 mr-2 lg:mt-0 mt-24 z-10"
+            className="border-2 border-orange-500 shadow-md hover:shadow-inner py-1 px-4 rounded-sm text-orange-500 font-bold lg:text-2xl text-xl absolute right-0 top-0 lg:mr-6 mr-2 lg:mt-0 mt-16 z-10"
             onClick={() => setImagesForSlider([])}
           >
             X
@@ -66,6 +66,8 @@ export default function Home({ posts }) {
             items={mapImagesForSlider(imagesForSlider, "imgSlider")}
           />
         </div>
+      ) : (
+        <div></div>
       )}
     </>
   );
