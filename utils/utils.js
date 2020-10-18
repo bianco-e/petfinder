@@ -10,7 +10,6 @@ import {
   faChevronLeft,
   faChevronDown,
   faChevronUp,
-  faImages,
   faTrash,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
@@ -27,7 +26,6 @@ export const icons = {
   leftArrow: faChevronLeft,
   downArrow: faChevronDown,
   upArrow: faChevronUp,
-  blankImage: faImages,
   delete: faTrash,
   edit: faEdit,
 };

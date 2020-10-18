@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icons, mapImagesForSlider } from "../utils/utils";
+import { mapImagesForSlider } from "../utils/utils";
 import ImageGallery from "react-image-gallery";
 
 export default function ImagesInput({ images, setImages }) {
@@ -17,7 +16,7 @@ export default function ImagesInput({ images, setImages }) {
         />
       </label>
       <div
-        className="flex items-center justify-around h-56 p-2 text-orange-900"
+        className="flex items-center justify-around p-2 text-orange-900"
         style={{ fontSize: 120 }}
       >
         {images.length ? (
@@ -31,7 +30,7 @@ export default function ImagesInput({ images, setImages }) {
             items={mapImagesForSlider(images, "imgInput")}
           />
         ) : (
-          <FontAwesomeIcon icon={icons.blankImage} />
+          <div></div>
         )}
       </div>
     </div>
