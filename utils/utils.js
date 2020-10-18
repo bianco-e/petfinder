@@ -92,7 +92,7 @@ export const emptyPost = {
     zone: "",
   },
   text: "",
-  images: [""],
+  images: [],
   state: "lost",
   date: new Date(),
   createdAt: new Date(),
@@ -139,3 +139,8 @@ export const stepsData = [
     text: "¡Encontrala!",
   },
 ];
+
+export const mapImagesForSlider = (images, className) =>
+  images.map((image) => {
+    return { original: image, originalClass: className };
+  });

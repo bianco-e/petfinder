@@ -26,7 +26,12 @@ const stateText = {
   female: "a",
 };
 
-export default function PetCard({ data, editable, variant = "normal" }) {
+export default function PetCard({
+  data,
+  editable,
+  variant = "normal",
+  setImagesForSlider,
+}) {
   const { images, user, pet, date, text, location, state, _id } = data;
   const [textHeight, setTextHeight] = useState({
     height: "h-10",
@@ -50,6 +55,7 @@ export default function PetCard({ data, editable, variant = "normal" }) {
     <div className={`${style[variant].container} my-4`}>
       <div
         className={`${style[variant].image} bg-cover bg-center rounded-t overflow-hidden cursor-pointer`}
+        onClick={() => setImagesForSlider(images)}
         style={{ backgroundImage: `url('${images[0]}')` }}
         title={pet.name}
       ></div>
@@ -72,7 +78,9 @@ export default function PetCard({ data, editable, variant = "normal" }) {
               <FontAwesomeIcon icon={icons[pet.species]} />
               <span className="ml-3">{pet.name}</span>
             </div>
-            <FontAwesomeIcon icon={icons[pet.description.gender]} />
+            <div className="text-orange-900 pr-2">
+              <FontAwesomeIcon icon={icons[pet.description.gender]} />
+            </div>
           </div>
           <p
             className={`text-gray-700 text-sm transition-all duration-500 overflow-hidden ${textHeight.height}`}

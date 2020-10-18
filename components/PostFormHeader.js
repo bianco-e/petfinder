@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { icons, formatDate } from "../utils/utils";
+import { formatDate } from "../utils/utils";
 import CheckOption from "./CheckOption";
+import ImagesInput from "./ImagesInput";
 
-export default function Component({
+export default function PostFormHeader({
   date,
   gender,
   images,
@@ -55,9 +55,9 @@ export default function Component({
           />
         );
       })}
-      <div className="flex justify-between items-start w-64">
-        <div className="w-1/2 flex flex-col items-start">
-          <span className="font-bold text-orange-900 capitalize">¿Cuándo?</span>
+      <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center">
+          <span className="font-bold text-orange-900 text-lg">¿Cuándo?</span>
           <input
             className="border-0 shadow-none my-2 p-0 cursor-pointer font-bold"
             onChange={(e) => setDate(e.target.value)}
@@ -65,22 +65,8 @@ export default function Component({
             value={formatDate(date, true)}
           />
         </div>
-        <div className="w-1/2 flex flex-col items-end">
-          <span className="font-bold text-orange-900">Imágenes</span>
-          <label className="flex flex-col items-center cursor-pointer">
-            <p className="flex items-center justify-center p-2 text-4xl text-orange-900">
-              <FontAwesomeIcon icon={icons.blankImage} />
-            </p>
-            <input
-              className="hidden"
-              onChange={(e) =>
-                e.target.files.length < 4 && setImages(e.target.files)
-              }
-              type="file"
-              multiple
-            />
-          </label>
-        </div>
+
+        <ImagesInput images={images} setImages={setImages} />
       </div>
     </div>
   );

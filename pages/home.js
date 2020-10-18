@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import auth0 from "../utils/auth0";
+import { mapImagesForSlider } from "../utils/utils";
+import ImageGallery from "react-image-gallery";
 import Pets from "../components/Pets";
 import MainFilter from "../components/MainFilter";
 import postsAPI from "../db/posts/api";
@@ -10,6 +12,7 @@ export default function Home({ posts }) {
     species: { value: undefined, title: undefined },
     state: { value: undefined, title: undefined },
   });
+  const [imagesForSlider, setImagesForSlider] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState();
   const setFilter = (prop, title, value) => {
     const newAppliedFilters = {
@@ -42,7 +45,28 @@ export default function Home({ posts }) {
   return (
     <>
       <MainFilter setFilter={setFilter} appliedFilters={appliedFilters} />
-      <Pets pets={filteredPosts || posts} />
+      <Pets
+        pets={filteredPosts || posts}
+        setImagesForSlider={setImagesForSlider}
+      />
+      {imagesForSlider.length && (
+        <div className="fixed w-full flex justify-center items-center pb-24 h-screen bg-orange-100 bg-opacity-75">
+          <button
+            className="border-2 border-orange-500 shadow-md hover:shadow-inner py-1 px-4 rounded-sm text-orange-500 font-bold lg:text-2xl text-xl absolute right-0 top-0 lg:mr-6 mr-2 lg:mt-0 mt-24 z-10"
+            onClick={() => setImagesForSlider([])}
+          >
+            X
+          </button>
+          <ImageGallery
+            autoPlay={false}
+            showFullscreenButton={false}
+            showPlayButton={false}
+            showThumbnails={false}
+            showNav={true}
+            items={mapImagesForSlider(imagesForSlider, "imgSlider")}
+          />
+        </div>
+      )}
     </>
   );
 }

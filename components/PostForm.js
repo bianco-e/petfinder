@@ -14,6 +14,7 @@ export default function PostForm({ editingPost }) {
 
   useEffect(() => editingPost && setPost(editingPost), []);
 
+  const setImages = (imgs) => setPost({ ...post, images: imgs });
   const setDate = (value) => setPost({ ...post, date: value });
   const setState = (value) => setPost({ ...post, state: value });
   const setSpecies = (value) =>
@@ -102,6 +103,18 @@ export default function PostForm({ editingPost }) {
     },
   ];
 
+  const storeImages = (imagesArray) => {
+    if (imagesArray.length < 4) {
+      const settedFiles = imagesArray.map((file) => {
+        return {
+          preview: URL.createObjectURL(file),
+          file,
+        };
+      });
+      setImages(settedFiles);
+    }
+  };
+
   const handlePost = (postId) =>
     getUserInfo()
       .then(({ sub, given_name, family_name, picture, error }) => {
@@ -134,12 +147,12 @@ export default function PostForm({ editingPost }) {
             gender={
               editingPost?.pet.description.gender || pet.description.gender
             }
-            images={images}
+            images={images.map((img) => img.preview)}
             species={editingPost?.pet.species || pet.species}
             state={editingPost?.state || state}
             setDate={setDate}
             setGender={setGender}
-            setImages={(value) => console.log(value)}
+            setImages={(imagesArray) => storeImages(imagesArray)}
             setSpecies={setSpecies}
             setState={setState}
           />
