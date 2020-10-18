@@ -147,7 +147,7 @@ export default function PostForm({ editingPost }) {
             gender={
               editingPost?.pet.description.gender || pet.description.gender
             }
-            images={images.map((img) => img.preview)}
+            images={images.map((img) => img.preview || img)}
             species={editingPost?.pet.species || pet.species}
             state={editingPost?.state || state}
             setDate={setDate}
