@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-export default function Component({ showDropdown, setShowDropdown, user }) {
+export default function ProfileButton({ showDropdown, setShowDropdown, user }) {
   const { given_name, picture } = user;
   const triggerDropdown = () => setShowDropdown(!showDropdown);
   useEffect(() => {

@@ -11,7 +11,7 @@ import {
   faChevronDown,
   faChevronUp,
   faTrash,
-  faEdit,
+  faEdit
 } from "@fortawesome/free-solid-svg-icons";
 
 export const icons = {
@@ -27,7 +27,7 @@ export const icons = {
   downArrow: faChevronDown,
   upArrow: faChevronUp,
   delete: faTrash,
-  edit: faEdit,
+  edit: faEdit
 };
 
 export function formatDate(date, forInput) {
@@ -35,7 +35,7 @@ export function formatDate(date, forInput) {
     return new Date(date).toLocaleDateString("es-ES", {
       day: "numeric",
       month: "numeric",
-      year: "numeric",
+      year: "numeric"
     });
   return new Date(date).toISOString().split("T")[0];
 }
@@ -58,13 +58,13 @@ export const validateFields = (object) => {
 export const filtersData = [
   [
     { title: "Perdidos", value: "lost", filterType: "state" },
-    { title: "Encontrados", value: "found", filterType: "state" },
+    { title: "Encontrados", value: "found", filterType: "state" }
   ],
   [
     { title: "Perros", value: "dog", filterType: "species" },
     { title: "Gatos", value: "cat", filterType: "species" },
-    { title: "Otros", value: "other", filterType: "species" },
-  ],
+    { title: "Otros", value: "other", filterType: "species" }
+  ]
 ];
 
 export const emptyPost = {
@@ -73,7 +73,7 @@ export const emptyPost = {
     avatar: "",
     firstName: "",
     lastName: "",
-    phone: "",
+    phone: ""
   },
   pet: {
     name: "",
@@ -81,13 +81,13 @@ export const emptyPost = {
     description: {
       gender: "",
       color: "",
-      identifyingFeature: "",
-    },
+      identifyingFeature: ""
+    }
   },
   location: {
     province: "",
     city: "",
-    zone: "",
+    zone: ""
   },
   text: "",
   images: [],
@@ -95,7 +95,7 @@ export const emptyPost = {
   date: new Date(),
   createdAt: new Date(),
   updatedAt: new Date(),
-  deleted: false,
+  deleted: false
 };
 export class Post {
   constructor({
@@ -108,7 +108,7 @@ export class Post {
     date,
     createdAt,
     updatedAt,
-    deleted,
+    deleted
   }) {
     this.user = user;
     this.pet = pet;
@@ -126,19 +126,27 @@ export class Post {
 export const stepsData = [
   {
     image: "/lost-dog.jpeg",
-    text: "¿Perdiste a tu mascota?",
+    text: "¿Perdiste a tu mascota?"
   },
   {
     image: "/letter-dog.jpg",
-    text: "Publicá gratis",
+    text: "Publicá gratis"
   },
   {
     image: "/found-dog.jpg",
-    text: "¡Encontrala!",
-  },
+    text: "¡Encontrala!"
+  }
 ];
 
 export const mapImagesForSlider = (images, className) =>
   images.map((image) => {
     return { original: image, originalClass: className };
   });
+
+export const parseFilters = (filters) => {
+  return {
+    "pet.species": filters.species.value,
+    "location.city": filters.city.value,
+    "state": filters.state.value
+  };
+};
