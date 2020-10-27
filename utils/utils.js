@@ -150,3 +150,10 @@ export const parseFilters = (filters) => {
     "state": filters.state.value
   };
 };
+
+export const capitalize = (word) =>
+  word
+    .toLowerCase()
+    .split("")
+    .map((letter, i) => (i > 0 ? letter : letter.toUpperCase()))
+    .join("");

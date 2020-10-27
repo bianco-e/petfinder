@@ -5,7 +5,7 @@ import Select from "./Select";
 import PostFormHeader from "./PostFormHeader";
 import PageTitle from "./PageTitle";
 import provinces from "../provinces.json";
-import { Post, emptyPost, validateFields } from "../utils/utils";
+import { Post, capitalize, emptyPost, validateFields } from "../utils/utils";
 import { addPost, editPost, getUserInfo } from "../apiQueries/apiQueries";
 
 export default function PostForm({ editingPost }) {
@@ -15,11 +15,11 @@ export default function PostForm({ editingPost }) {
 
   const getCitiesInProvince = (province) => {
     return fetch(
-      `https://apis.datos.gob.ar/georef/api/municipios?provincia=${province}&campos=nombre&max=150`
+      `https://apis.datos.gob.ar/georef/api/localidades?provincia=${province}&campos=nombre&max=400`
     )
       .then((res) => res.json())
-      .then(({ municipios }) =>
-        setCities(municipios.map(({ nombre }) => nombre).sort())
+      .then(({ localidades }) =>
+        setCities(localidades.map(({ nombre }) => capitalize(nombre)).sort())
       );
   };
 
