@@ -9,10 +9,25 @@ import { Post, emptyPost, validateFields } from "../utils/utils";
 import { addPost, editPost, getUserInfo } from "../apiQueries/apiQueries";
 
 export default function PostForm({ editingPost }) {
+  const [cities, setCities] = useState([]);
   const [post, setPost] = useState(emptyPost);
   const { pet, images, user, location, text, state, date, updatedAt } = post;
 
+  const getCitiesInProvince = (province) => {
+    return fetch(
+      `https://apis.datos.gob.ar/georef/api/municipios?provincia=${province}&campos=nombre&max=150`
+    )
+      .then((res) => res.json())
+      .then(({ municipios }) =>
+        setCities(municipios.map(({ nombre }) => nombre).sort())
+      );
+  };
+
   useEffect(() => editingPost && setPost(editingPost), []);
+
+  useEffect(() => {
+    post.location.province && getCitiesInProvince(post.location.province);
+  }, [post.location.province]);
 
   const setImages = (imgs) => setPost({ ...post, images: imgs });
   const setDate = (value) => setPost({ ...post, date: value });
@@ -24,13 +39,13 @@ export default function PostForm({ editingPost }) {
       ...post,
       pet: {
         ...pet,
-        description: { ...pet.description, gender: value },
-      },
+        description: { ...pet.description, gender: value }
+      }
     });
   const setProvince = (value) =>
     setPost({
       ...post,
-      location: { ...post.location, province: value },
+      location: { ...post.location, province: value }
     });
   const setCity = (value) =>
     setPost({ ...post, location: { ...post.location, city: value } });
@@ -40,7 +55,7 @@ export default function PostForm({ editingPost }) {
       ph: "Nombre",
       value: pet.name,
       onChange: (e) =>
-        setPost({ ...post, pet: { ...post.pet, name: e.target.value } }),
+        setPost({ ...post, pet: { ...post.pet, name: e.target.value } })
     },
     {
       ph: "Color",
@@ -50,9 +65,9 @@ export default function PostForm({ editingPost }) {
           ...post,
           pet: {
             ...post.pet,
-            description: { ...post.pet.description, color: e.target.value },
-          },
-        }),
+            description: { ...post.pet.description, color: e.target.value }
+          }
+        })
     },
     {
       ph: "Rasgo característico",
@@ -64,10 +79,10 @@ export default function PostForm({ editingPost }) {
             ...post.pet,
             description: {
               ...post.pet.description,
-              identifyingFeature: e.target.value,
-            },
-          },
-        }),
+              identifyingFeature: e.target.value
+            }
+          }
+        })
     },
     {
       ph: "Zona",
@@ -77,9 +92,9 @@ export default function PostForm({ editingPost }) {
           ...post,
           location: {
             ...post.location,
-            zone: e.target.value,
-          },
-        }),
+            zone: e.target.value
+          }
+        })
     },
     {
       ph: "Whatsapp (+54 9 ...)",
@@ -89,18 +104,18 @@ export default function PostForm({ editingPost }) {
           ...post,
           user: {
             ...post.user,
-            phone: e.target.value,
-          },
-        }),
-    },
+            phone: e.target.value
+          }
+        })
+    }
   ];
   const selectsData = [
     { name: "province", options: provinces, setter: setProvince },
     {
       name: "city",
-      options: ["Ciudad", "Mendoza", "Rosario"],
-      setter: setCity,
-    },
+      options: ["Ciudad", ...cities],
+      setter: setCity
+    }
   ];
 
   const storeImages = (imagesArray) => {
@@ -108,7 +123,7 @@ export default function PostForm({ editingPost }) {
       const settedFiles = imagesArray.map((file) => {
         return {
           preview: URL.createObjectURL(file),
-          file,
+          file
         };
       });
       setImages(settedFiles);
@@ -126,8 +141,8 @@ export default function PostForm({ editingPost }) {
               firstName: given_name,
               lastName: family_name,
               avatar: picture,
-              phone: user.phone,
-            },
+              phone: user.phone
+            }
           });
           postId ? editPost(postId, newPost) : addPost(newPost);
         }

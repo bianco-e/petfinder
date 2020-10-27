@@ -7,7 +7,7 @@ import postsAPI from "../db/posts/api";
 import { getFilteredPosts } from "../apiQueries/apiQueries";
 import { parseFilters } from "../utils/utils";
 
-export default function Home({ initialPosts }) {
+export default function ({ initialPosts }) {
   const [appliedFilters, setAppliedFilters] = useState({
     city: { value: undefined, title: undefined },
     species: { value: undefined, title: undefined },
@@ -15,6 +15,7 @@ export default function Home({ initialPosts }) {
   });
   const [imagesForSlider, setImagesForSlider] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState(initialPosts);
+
   const setFilter = (prop, title, value) => {
     const newAppliedFilters = {
       ...appliedFilters,
@@ -31,6 +32,8 @@ export default function Home({ initialPosts }) {
     getFilteredPosts(parseFilters(newAppliedFilters)).then((posts) =>
       setFilteredPosts(posts)
     );
+
+  // Estoy haciendo esto pero ahora desde la versión de vercel me tira error de cors
 
   return (
     <>
