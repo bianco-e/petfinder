@@ -1,8 +1,20 @@
 import "../../../db/database";
 import Post from "../../../db/models/post";
+import { mapQueryToFiltersForDB } from "../../../utils/utils";
 
 export default async (req, res) => {
   switch (req.method) {
+    case "GET":
+      const filter = JSON.parse(mapQueryToFiltersForDB(req.query));
+      try {
+        Post.find({ deleted: false, ...filter }, (err, docs) => {
+          if (err) return console.log(err);
+          return res.status(200).json(docs);
+        });
+      } catch (error) {
+        return res.status(400).json({ error });
+      }
+      break;
     case "POST":
       try {
         new Post(req.body).save((err, addedPost) => {

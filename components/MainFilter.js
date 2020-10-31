@@ -18,7 +18,7 @@ export default function MainFilter({ appliedFilters, setFilter }) {
             dataIndex > 0 ? setDataIndex(dataIndex - 1) : setDataIndex(101)
           }
         >
-          <FontAwesomeIcon icon={icons.leftArrow} />
+          <FontAwesomeIcon icon={icons.leftArrow} styles={{ width: 20 }} />
         </button>
         {filtersData[dataIndex % filtersData.length].map(
           ({ filterType, title, value }) => (

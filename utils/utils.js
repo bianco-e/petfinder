@@ -143,12 +143,18 @@ export const mapImagesForSlider = (images, className) =>
     return { original: image, originalClass: className };
   });
 
-export const parseFilters = (filters) => {
-  return {
-    "pet.species": filters.species.value,
-    "location.city": filters.city.value,
-    "state": filters.state.value
-  };
+export const mapFiltersToQueryString = (filters) => {
+  const { species, city, state } = filters;
+  return `species=${species.value}&city=${city.value}&state=${state.value}`;
+};
+
+export const mapQueryToFiltersForDB = (query) => {
+  const { species, city, state } = query;
+  return JSON.stringify({
+    "pet.species": species !== "undefined" ? species : undefined,
+    "location.city": city !== "undefined" ? city : undefined,
+    "state": state !== "undefined" ? state : undefined
+  });
 };
 
 export const capitalize = (word) =>

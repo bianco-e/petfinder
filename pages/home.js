@@ -5,7 +5,7 @@ import MainFilter from "../components/MainFilter";
 import ImagesModal from "../components/ImagesModal";
 import postsAPI from "../db/posts/api";
 import { getFilteredPosts } from "../apiQueries/apiQueries";
-import { parseFilters } from "../utils/utils";
+import { mapFiltersToQueryString } from "../utils/utils";
 
 export default function ({ initialPosts }) {
   const [appliedFilters, setAppliedFilters] = useState({
@@ -29,11 +29,9 @@ export default function ({ initialPosts }) {
   };
 
   const filterPets = (newAppliedFilters) =>
-    getFilteredPosts(parseFilters(newAppliedFilters)).then((posts) =>
+    getFilteredPosts(mapFiltersToQueryString(newAppliedFilters)).then((posts) =>
       setFilteredPosts(posts)
     );
-
-  // Estoy haciendo esto pero ahora desde la versión de vercel me tira error de cors
 
   return (
     <>

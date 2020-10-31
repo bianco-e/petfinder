@@ -1,7 +1,7 @@
-const URL = process.env.APP_DOMAIN || "http://localhost:3000";
+const URL = process.env.NEXT_PUBLIC_APP_DOMAIN;
 
-export const getFilteredPosts = (filter) =>
-  fetch(`${URL}/api/posts/${JSON.stringify(filter)}`).then((res) => res.json());
+export const getFilteredPosts = (queryString) =>
+  fetch(`${URL}/api/posts?${queryString}`).then((res) => res.json());
 
 export const addPost = (post) =>
   fetch(`${URL}/api/posts`, {
