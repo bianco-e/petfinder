@@ -5,7 +5,7 @@ import Button from "./Button";
 export default function Introduction() {
   const router = useRouter();
   return (
-    <div className="banner-div bg-orange-500">
+    <div className="banner-div lg:px-8 px-5 bg-orange-500">
       <div className="w-1/2 h-64 flex flex-col justify-around">
         <h1 className="text-orange-900 lg:text-4xl text-3xl">Petfinder</h1>
         <p className="text-white font-medium lg:text-2xl text-xl mt-5 pr-6">
@@ -39,13 +39,13 @@ export default function Introduction() {
           return (
             <div className="flex flex-col items-center" key={text}>
               <div
-                className={`w-20 h-20 rounded-full my-1 border-solid border-4 ${
+                className={`lg:w-24 lg:h-24 w-20 h-20 rounded-full my-1 border-solid border-4 ${
                   idx == 1 ? "border-orange-900" : "border-orange-100"
                 }`}
                 style={{
                   background: `url('${image}')`,
                   backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  backgroundPosition: "center"
                 }}
               ></div>
               <p className="text-orange-900 font-bold text-lg text-center">

@@ -20,7 +20,7 @@ export default function Nav({}) {
   }, []);
 
   return (
-    <nav className="navBar sticky top-0">
+    <nav className="navBar lg:px-8 px-5 sticky top-0">
       <Logo text={!user} route={user ? "/home" : "/"} />
       {!user ? (
         <Button onClick={() => router.push("/api/login")}>
