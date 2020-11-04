@@ -175,7 +175,7 @@ export default function PostForm({ editingPost }) {
           {inputsData.slice(0, 3).map(({ ph, value, onChange }) => {
             return (
               <input
-                className="lg:w-1/3 placeholder-orange-500 bg-orange-100 focus:shadow-md my-4"
+                className="lg:w-1/3 placeholder-orange-900 bg-orange-100 focus:shadow-md my-4"
                 key={ph}
                 onChange={(e) => onChange(e)}
                 value={value}
@@ -202,7 +202,7 @@ export default function PostForm({ editingPost }) {
           {inputsData.slice(3).map(({ ph, value, onChange }) => {
             return (
               <input
-                className="lg:w-1/3 placeholder-orange-500 bg-orange-100 focus:shadow-md my-4"
+                className="lg:w-1/3 placeholder-orange-900 bg-orange-100 focus:shadow-md my-4"
                 key={ph}
                 onChange={(e) => onChange(e)}
                 value={value}

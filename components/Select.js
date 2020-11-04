@@ -4,7 +4,7 @@ export default function Select({ options, selected, setter }) {
       <select
         value={selected}
         onChange={(e) => setter(e.target.value)}
-        className="text-center text-orange-500 cursor-pointer block appearance-none w-full bg-transparent border border-orange-900 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-md"
+        className="text-center text-orange-900 cursor-pointer block appearance-none w-full bg-transparent border border-orange-900 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-md"
       >
         {options.map((option) => (
           <option key={option} value={option}>
