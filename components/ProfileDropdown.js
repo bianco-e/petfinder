@@ -27,8 +27,7 @@ export default function ProfileDropdown({ goToMyPosts }) {
   const buttons = [
     { title: "Búsquedas", onClick: () => router.push("/home") },
     { title: "Mis publicaciones", onClick: goToMyPosts },
-    // { title: "Configuración", onClick: () => {} },
-    { title: "Salir", onClick: () => router.push("/api/logout") },
+    { title: "Salir", onClick: () => router.push("/api/auth/logout") },
   ];
   return (
     <div style={style.wrapper}>

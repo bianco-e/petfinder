@@ -18,7 +18,7 @@ export default function Introduction() {
           <Button
             spaced
             variant="secondary"
-            onClick={() => router.push("/api/login")}
+            onClick={() => router.push("/api/auth/login")}
           >
             Iniciar sesión
           </Button>
@@ -45,7 +45,7 @@ export default function Introduction() {
                 style={{
                   background: `url('${image}')`,
                   backgroundSize: "cover",
-                  backgroundPosition: "center"
+                  backgroundPosition: "center",
                 }}
               ></div>
               <p className="text-orange-900 font-bold text-lg text-center">

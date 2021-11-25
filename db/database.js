@@ -12,14 +12,14 @@ const options = {
   bufferMaxEntries: 0,
 };
 const {
-  MONGO_HOSTNAME,
-  MONGO_DB,
-  MONGO_USERNAME,
-  MONGO_PASSWORD,
+  NEXT_PUBLIC_MONGO_HOSTNAME,
+  NEXT_PUBLIC_MONGO_DB,
+  NEXT_PUBLIC_MONGO_USERNAME,
+  NEXT_PUBLIC_MONGO_PASSWORD,
 } = process.env;
 
 const dbConnectionURL = {
-  "MongoAtlas": `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}${MONGO_HOSTNAME}/${MONGO_DB}?retryWrites=true&w=majority`,
+  MongoAtlas: `mongodb+srv://${NEXT_PUBLIC_MONGO_USERNAME}:${NEXT_PUBLIC_MONGO_PASSWORD}@${NEXT_PUBLIC_MONGO_HOSTNAME}/${NEXT_PUBLIC_MONGO_DB}?retryWrites=true&w=majority`,
 };
 mongoose.connect(dbConnectionURL.MongoAtlas, options);
 const db = mongoose.connection;

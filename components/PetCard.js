@@ -14,7 +14,7 @@ const style = {
   },
   normal: {
     container: "w-full lg:flex",
-    image: "h-64 lg:w-64 lg:rounded-t-none lg:rounded-l",
+    image: "h-full lg:w-64 lg:rounded-t-none lg:rounded-l",
     details:
       "lg:w-4/5 shadow-lg lg:border-l-0 lg:border-t lg:rounded-b-none lg:rounded-r",
   },
@@ -33,26 +33,38 @@ export default function PetCard({
   setImagesForSlider,
 }) {
   const { images, user, pet, date, text, location, state, _id } = data;
-  const [textHeight, setTextHeight] = useState({
-    height: "h-10",
+  const [currentHeight, setCurrentHeight] = useState({
+    containerHeight: "h-64",
+    textHeight: "h-10",
     arrow: undefined,
   });
   const router = useRouter();
   const textRef = useRef();
   const message = `¡Hola! Te contacto por la publicación de Petfinder ${router.route}`;
+
   const resizeText = () =>
-    textHeight.height === "h-10"
-      ? setTextHeight({ height: "h-auto", arrow: "upArrow" })
-      : setTextHeight({ height: "h-10", arrow: "downArrow" });
+    currentHeight.textHeight === "h-10"
+      ? setCurrentHeight({
+          textHeight: "h-auto",
+          arrow: "upArrow",
+          containerHeight: "h-72",
+        })
+      : setCurrentHeight({
+          textHeight: "h-10",
+          arrow: "downArrow",
+          containerHeight: "h-64",
+        });
 
   useEffect(() => {
     if (textRef.current.scrollHeight > 42) {
-      setTextHeight({ ...textHeight, arrow: "downArrow" });
+      setCurrentHeight({ ...currentHeight, arrow: "downArrow" });
     }
   }, []);
 
   return (
-    <div className={`${style[variant].container} my-4`}>
+    <div
+      className={`${style[variant].container} ${currentHeight.containerHeight} my-4`}
+    >
       <div
         className={`${style[variant].image} bg-cover bg-center rounded-t overflow-hidden cursor-pointer`}
         onClick={() => setImagesForSlider(images)}
@@ -83,14 +95,14 @@ export default function PetCard({
             </div>
           </div>
           <p
-            className={`text-gray-700 text-sm transition-all duration-500 overflow-hidden ${textHeight.height}`}
+            className={`text-gray-700 text-sm transition-all duration-500 overflow-hidden ${currentHeight.textHeight}`}
             ref={textRef}
           >
             {text}
           </p>
-          {textHeight.arrow ? (
+          {currentHeight.arrow ? (
             <button className="text-center w-full text-xl" onClick={resizeText}>
-              <FontAwesomeIcon icon={icons[textHeight.arrow]} />
+              <FontAwesomeIcon icon={icons[currentHeight.arrow]} />
             </button>
           ) : (
             <div className="h-6"></div>

@@ -23,7 +23,7 @@ export default function Nav({}) {
     <nav className="navBar lg:px-8 px-5 sticky top-0">
       <Logo text={!user} route={user ? "/home" : "/"} />
       {!user ? (
-        <Button onClick={() => router.push("/api/login")}>
+        <Button onClick={() => router.push("/api/auth/login")}>
           Iniciar sesión
         </Button>
       ) : (

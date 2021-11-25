@@ -11,14 +11,15 @@ export default function MainFilter({ appliedFilters, setFilter }) {
     <div className="w-full py-2 flex flex-col items-center bg-orange-500 text-orange-100">
       <h2 className="my-0 text-lg lg:text-xl">Filtrar búsqueda</h2>
       <LocationInput setFilter={setFilter} />
-      <div className="lg:w-2/3 w-full flex items-center justify-between">
+
+      <div className="lg:w-2/3 w-full flex items-center h-12 mt-2 justify-between">
         <button
           className="text-5xl text-orange-900"
           onClick={() =>
             dataIndex > 0 ? setDataIndex(dataIndex - 1) : setDataIndex(101)
           }
         >
-          <FontAwesomeIcon icon={icons.leftArrow} styles={{ width: 20 }} />
+          <FontAwesomeIcon icon={icons.leftArrow} />
         </button>
         {filtersData[dataIndex % filtersData.length].map(
           ({ filterType, title, value }) => (

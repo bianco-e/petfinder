@@ -6,8 +6,12 @@ export default async (req, res) => {
   switch (req.method) {
     case "GET":
       const filter = JSON.parse(mapQueryToFiltersForDB(req.query));
+      const city = filter["location.city"];
+      const location = city
+        ? { "location.city": { $regex: city, $options: "i" } }
+        : undefined;
       try {
-        Post.find({ deleted: false, ...filter }, (err, docs) => {
+        Post.find({ deleted: false, ...filter, ...location }, (err, docs) => {
           if (err) return console.log(err);
           return res.status(200).json(docs);
         });
